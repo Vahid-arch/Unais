@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unais CC | Sales Executive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --secondary: #00cc99;
+            --accent: #ff3366;
+            --dark: #0a192f;
+            --darker: #020c1b;
+            --light: #ccd6f6;
+            --lighter: #e6f1ff;
+            --gray: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 3D Background */
+        #three-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(2, 12, 27, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+            /* Add padding to prevent navbar overlap */
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 700px;
+        }
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+            box-shadow: 0 20px 50px rgba(0, 102, 255, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 102, 255, 0.4);
+        }
+
+        .profile-frame {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 3px solid transparent;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent)) border-box;
+            opacity: 0.5;
+            z-index: 1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .profile-badge {
+            position: absolute;
+            bottom: 20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 3;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 204, 153, 0.1);
+            border-radius: 30px;
+            border: 1px solid rgba(0, 204, 153, 0.2);
+        }
+
+        .hero-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50px;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+        }
+
+        .highlight-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .highlight-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        .element-1 {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            right: 10%;
+        }
+
+        .element-2 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 20%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+        }
+
+        .element-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            right: 30%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Experience Section */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.2);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 30px;
+            right: -36px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 10;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -36px;
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.2);
+        }
+
+        .skill-category h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category h3 i {
+            color: var(--primary);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.2);
+        }
+
+        .contact-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card h3 i {
+            color: var(--primary);
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(2, 12, 27, 0.95);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(0, 102, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 12, 27, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .success-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transform: translateY(50px);
+            transition: transform 0.5s ease;
+        }
+
+        .success-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .modal-message {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive Design - MOBILE FIX */
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .profile-container {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .profile-container {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .profile-container {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+
+            .profile-badge {
+                right: 0;
+                left: 0;
+                margin: 0 auto;
+                width: max-content;
+            }
+
+            .hero-highlights {
+                justify-content: center;
+            }
+
+            .highlight-item {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+                height: 70px;
+                /* Fixed height for mobile */
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                /* Match navbar height */
+                left: 0;
+                width: 100%;
+                background: rgba(2, 12, 27, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-menu-btn.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-btn.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-btn.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            .hero {
+                padding-top: 120px;
+                /* Increased padding for mobile */
+                min-height: calc(100vh - 70px);
+                /* Subtract navbar height */
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+                margin-top: 1rem;
+                /* Add margin to separate from navbar */
+            }
+
+            .hero-subtitle {
+                margin-top: 1rem;
+                /* Add margin to separate from navbar */
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-right: 0;
+                padding-left: 70px;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 70px;
+            }
+
+            .timeline-dot {
+                left: 21px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 21px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+
+            .profile-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            /* Fix for all sections to not hide under navbar */
+            section {
+                padding: 5rem 5% 4rem;
+                scroll-margin-top: 80px;
+                /* Prevent navbar overlap when scrolling */
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 100px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                margin-top: 0.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .profile-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-badge {
+                font-size: 0.8rem;
+                padding: 0.6rem 1rem;
+                bottom: 10px;
+            }
+
+            .hero-highlights {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero {
+                padding-top: 90px;
+            }
+
+            .profile-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Photo Placeholder Styling */
+        .photo-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 204, 153, 0.1));
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 20px;
+            border: 5px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+            box-shadow: 0 20px 50px rgba(0, 102, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .photo-placeholder span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 3D Background -->
+    <div id="three-bg"></div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="modal-title">Message Sent Successfully!</h2>
+            <p class="modal-message">Thank you for your message. I'll get back to you as soon as possible.</p>
+            <button class="btn btn-primary" id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">UNAIS<span>CC</span></a>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-subtitle fade-in">Sales Executive</div>
+                <h1 class="hero-title fade-in delay-1">Muhammed Unais</h1>
+                <p class="hero-description fade-in delay-2">
+                    Independent and motivated Trade Sales Executive with proven record of accomplishment
+                    of building and growing sales territories in competitive environments. Dedicated to
+                    building rapport and maintaining loyal customer relationships.
+                </p>
+
+                <div class="hero-highlights fade-in delay-2">
+                    <div class="highlight-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="highlight-text">2+ Years Experience</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="highlight-text">Business Development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span class="highlight-text">Client Relationship</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons fade-in delay-3">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact Me
+                    </a>
+                    <a href="#experience" class="btn btn-outline">
+                        <i class="fas fa-briefcase"></i> View Experience
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-section fade-in delay-2">
+                <div class="profile-container">
+                    <div class="profile-frame"></div>
+                    <!-- Photo will be loaded from Images/1770146215673.jpeg -->
+                    <img src="Images/1770146215673.jpeg" alt="Muhammed Unais - Sales Executive" class="profile-photo"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzUwIiBoZWlnaHQ9IjM1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDY2ZmY7Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBjYzk5OyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIzNTAiIGhlaWdodD0iMzUwIiBmaWxsPSJ1cmwoI2cpIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5NVUhBTU1FRCBBVU5BPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNTUlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+U0FMRVMgRVhFQ1VUSVZFPC90ZXh0Pjwvc3ZnPg=='">
+                    <div class="profile-badge">
+                        <i class="fas fa-award"></i>
+                        Sales Professional
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <div class="section-subtitle fade-in">About Me</div>
+            <h2 class="section-title fade-in delay-1">Professional Profile</h2>
+        </div>
+
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <p>
+                    Experienced Sales Executive with 2+ years of success in automation industry with focus
+                    on pre-sale products and design. Possess deep technical knowledge along with excellent
+                    communication and negotiation skills to close deals and drive sales.
+                </p>
+                <p>
+                    Friendly & personable with solid history of successful relationship management.
+                    Offering deep technical acumen with effective communication skills to help customers
+                    understand product offerings and create individual solutions.
+                </p>
+                <p>
+                    Currently based in Abu Dhabi, UAE, I'm dedicated to building long-term client
+                    relationships and driving business growth through strategic sales approaches and
+                    customer-centric solutions.
+                </p>
+
+                <div class="stats">
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item fade-in delay-1">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item fade-in delay-2">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat-item fade-in delay-3">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-text fade-in delay-2">
+                <h3
+                    style="font-family: 'Rajdhani', sans-serif; color: var(--light); margin-bottom: 1.5rem; font-size: 1.5rem;">
+                    Education</h3>
+
+                <div style="margin-bottom: 2rem; padding-left: 1rem; border-left: 3px solid var(--primary);">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.3rem;">Diploma in Logistics and Supply Chain
+                        Management</h4>
+                    <p style="color: var(--gray); margin-bottom: 0.5rem;">Confederation of Indian Industry • 2019</p>
+                </div>
+
+                <div style="margin-bottom: 2rem; padding-left: 1rem; border-left: 3px solid var(--primary);">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.3rem;">Bachelor of Business Administration</h4>
+                    <p style="color: var(--gray); margin-bottom: 0.5rem;">Tagore University • 2018</p>
+                </div>
+
+                <div style="margin-bottom: 2rem; padding-left: 1rem; border-left: 3px solid var(--primary);">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.3rem;">Senior Secondary Examination (XIIth)
+                    </h4>
+                    <p style="color: var(--gray); margin-bottom: 0.5rem;">HSE Kerala • 2015</p>
+                </div>
+
+                <h3
+                    style="font-family: 'Rajdhani', sans-serif; color: var(--light); margin-bottom: 1.5rem; font-size: 1.5rem; margin-top: 2rem;">
+                    Personal Details</h3>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <p style="color: var(--gray);"><strong>Nationality:</strong> Indian</p>
+                        <p style="color: var(--gray);"><strong>Visa Status:</strong> Residence Visa</p>
+                        <p style="color: var(--gray);"><strong>Driving License:</strong> UAE (Manual)</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--gray);"><strong>DOB:</strong> Nov 05, 1996</p>
+                        <p style="color: var(--gray);"><strong>Passport:</strong> PO408107</p>
+                        <p style="color: var(--gray);"><strong>Location:</strong> Abu Dhabi, UAE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" style="background: rgba(2, 12, 27, 0.7);">
+        <div class="section-header">
+            <div class="section-subtitle fade-in">Work History</div>
+            <h2 class="section-title fade-in delay-1">Professional Experience</h2>
+        </div>
+
+        <div class="timeline">
+            <!-- Current Job -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 2023 - Present</div>
+                    <h3 class="timeline-title">Sales Executive</h3>
+                    <div class="timeline-company">Istanbul Electrical Trading LLC, Abu Dhabi</div>
+                    <ul class="timeline-description" style="padding-left: 1.2rem;">
+                        <li>Develop and manage sales strategies and contact target customers</li>
+                        <li>Meet revenue expectations and implement comprehensive business plans</li>
+                        <li>Review and submit technical submittals for projects</li>
+                        <li>Participate in consultant and contractor meetings</li>
+                        <li>Maintain relationships with existing clients and develop new ones</li>
+                        <li>Analyze market trends and competitor performance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Previous Job -->
+            <div class="timeline-item fade-in delay-1">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2021 - 2022</div>
+                    <h3 class="timeline-title">Sales Executive</h3>
+                    <div class="timeline-company">Safe Line Electrical & Mechanical LLC, Abu Dhabi</div>
+                    <ul class="timeline-description" style="padding-left: 1.2rem;">
+                        <li>Managed sales and marketing of MEP products</li>
+                        <li>Responded to customer inquiries via phone, email, and fax</li>
+                        <li>Processed sales orders, invoices, and delivery notes</li>
+                        <li>Prepared and organized promotional materials and events</li>
+                        <li>Provided daily, monthly, and annual sales reports</li>
+                        <li>Handled material submittals and documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-subtitle fade-in">My Expertise</div>
+            <h2 class="section-title fade-in delay-1">Professional Skills</h2>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-chart-line"></i> Sales & Marketing</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Sales Strategy</span>
+                    <span class="skill-tag">Business Development</span>
+                    <span class="skill-tag">Market Analysis</span>
+                    <span class="skill-tag">Client Relationship</span>
+                    <span class="skill-tag">Negotiation</span>
+                    <span class="skill-tag">Revenue Growth</span>
+                    <span class="skill-tag">Trade Shows</span>
+                    <span class="skill-tag">Promotional Events</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in delay-1">
+                <h3><i class="fas fa-cogs"></i> Technical Expertise</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">MEP Products</span>
+                    <span class="skill-tag">Switchgears</span>
+                    <span class="skill-tag">Light Fittings</span>
+                    <span class="skill-tag">Lightning Protection</span>
+                    <span class="skill-tag">Wiring Accessories</span>
+                    <span class="skill-tag">LV Cables</span>
+                    <span class="skill-tag">Technical Submittals</span>
+                    <span class="skill-tag">Product Design</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in delay-2">
+                <h3><i class="fas fa-language"></i> Languages</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">English (Fluent)</span>
+                    <span class="skill-tag">Arabic (Conversational)</span>
+                    <span class="skill-tag">Hindi (Native)</span>
+                    <span class="skill-tag">Malayalam (Native)</span>
+                    <span class="skill-tag">Tamil (Fluent)</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in delay-3">
+                <h3><i class="fas fa-tools"></i> Professional Skills</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Customer Service</span>
+                    <span class="skill-tag">Communication</span>
+                    <span class="skill-tag">Team Leadership</span>
+                    <span class="skill-tag">Project Management</span>
+                    <span class="skill-tag">Analytical Thinking</span>
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">Time Management</span>
+                    <span class="skill-tag">Reporting</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: rgba(2, 12, 27, 0.7);">
+        <div class="section-header">
+            <div class="section-subtitle fade-in">Get In Touch</div>
+            <h2 class="section-title fade-in delay-1">Contact Me</h2>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info fade-in">
+                <div class="contact-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <p>Abu Dhabi, United Arab Emirates</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p><a href="tel:+971547573291">+971 54 757 3291</a></p>
+                </div>
+
+                <div class="contact-card">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p><a href="mailto:mohdunais1996@gmail.com">mohdunais1996@gmail.com</a></p>
+                </div>
+
+                <div class="contact-card">
+                    <h3><i class="fab fa-linkedin-in"></i> LinkedIn</h3>
+                    <p><a href="http://linkedin.com/in/muhammed-08208420b"
+                            target="_blank">linkedin.com/in/muhammed-08208420b</a></p>
+                </div>
+            </div>
+
+            <form class="contact-form fade-in delay-1" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">UNAIS<span style="color: var(--secondary);">CC</span></div>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="social-links">
+                <a href="tel:+971547573291" class="social-link" title="Call">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="mailto:mohdunais1996@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="http://linkedin.com/in/muhammed-08208420b" target="_blank" class="social-link"
+                    title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://wa.me/971547573291" target="_blank" class="social-link" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+
+            <div class="copyright">
+                &copy; 2024 Muhammed Unais. All rights reserved.<br>
+                Professional Sales Executive Portfolio
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            // Simulate API call (in real scenario, replace with actual FormSubmit or backend)
+            setTimeout(() => {
+                // Show success modal
+                successModal.classList.add('active');
+
+                // Reset form
+                contactForm.reset();
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            successModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links with offset for navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate navbar height
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+
+                    window.scrollTo({
+                        top: targetElement.offsetTop - navbarHeight - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add floating animation to elements
+        const floatingElements = document.querySelectorAll('.floating-element');
+        floatingElements.forEach((element, index) => {
+            element.style.animation = `float ${3 + index}s ease-in-out infinite`;
+        });
+
+        // Photo placeholder fallback
+        const profilePhoto = document.querySelector('.profile-photo');
+        profilePhoto.addEventListener('error', function () {
+            // If image fails to load, create a stylish placeholder
+            const placeholder = document.createElement('div');
+            placeholder.className = 'photo-placeholder';
+            placeholder.style.width = '100%';
+            placeholder.style.height = '100%';
+            placeholder.style.display = 'flex';
+            placeholder.style.alignItems = 'center';
+            placeholder.style.justifyContent = 'center';
+
+            const nameText = document.createElement('span');
+            nameText.innerHTML = 'MUHAMMED<br>UNAIS<br><small>SALES EXECUTIVE</small>';
+            nameText.style.textAlign = 'center';
+            nameText.style.fontSize = '1.8rem';
+            nameText.style.lineHeight = '1.4';
+
+            placeholder.appendChild(nameText);
+            this.parentNode.replaceChild(placeholder, this);
+        });
+
+        // Add CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(5deg); }
+            }
+            
+            @keyframes rotate {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize with navbar state
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        }
+    </script>
+</body>
+
+</html>
